@@ -3,9 +3,13 @@ import numpy as np
 import time
 import getpass
 import os
+
+# i is the no. attached to the file name like A1,A2,A3 remember to set i to the lastImageNo.+1 value to set filename to next 
 i=165
 
 getUser = getpass.getuser()
+
+#change the directory to which you want to store the img captured
 save = 'C:/Users/' + getUser + "/Desktop/images/C"
 
 vc = cv2.VideoCapture(0)
