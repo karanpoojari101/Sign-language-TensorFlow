@@ -32,7 +32,7 @@ while rval:
         print("{} written!".format(img_name))
         name= "C"+str(i)
         crop_img = frame[100:400, 100:400]
-        crop_img1 = masking(crop_img)
+        #crop_img1 = masking(crop_img)
         hsv = cv2.cvtColor(crop_img, cv2.COLOR_BGR2HSV)
         lower = np.array([0, 48, 80], dtype = "uint8")
         upper = np.array([20, 255, 255], dtype = "uint8")

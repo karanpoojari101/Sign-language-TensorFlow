@@ -82,7 +82,14 @@ def main():
     crop_img = frame[100:400, 100:400]
     #cv2.imshow("cropped", crop_img)
     crop_img1 = masking(crop_img)
-    cv2.imshow("cropped", crop_img1)
+    hsv = cv2.cvtColor(crop_img, cv2.COLOR_BGR2HSV)
+    lower = np.array([0, 48, 80], dtype = "uint8")
+    upper = np.array([20, 255, 255], dtype = "uint8")
+    # Threshold the HSV image to get only blue colors
+    mask = cv2.inRange(hsv, lower, upper)
+    # Bitwise-AND mask and original image
+    result = cv2.bitwise_and(crop_img,crop_img, mask= mask)
+    cv2.imshow("cropped", result)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -112,7 +119,7 @@ def main():
             finalTensor = sess.graph.get_tensor_by_name('final_result:0')
 
             # convert the OpenCV image (numpy array) to a TensorFlow image
-            tfImage = np.array(crop_img1)[:, :, 0:3]
+            tfImage = np.array(result)[:, :, 0:3]
         
             
             # run the network to get the predictions
